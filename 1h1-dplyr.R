@@ -32,6 +32,7 @@ slice(mtcars, 1L)
 slice(mtcars, n())
 slice(mtcars, 5:n())
 slice(mtcars, c(2,4,5,10))
+slice(mtcars, seq(1, 32, 2))
 
 (by_cyl <- group_by(mtcars, cyl)) # ???
 slice(by_cyl, 1:2)
@@ -43,13 +44,14 @@ View(mtcars) # spreasheet like form base pacakge
 
 mtcars %>% group_by(am) 
 #nothing - just separation
-
-mtcars %>% group_by(am) %>% summarise(mean(mpg), max(wt), min(wt))
+mtcars %>% group_by(gear) %>% tally()
+mtcars %>% group_by(gear) %>% summarise(mean(mpg))
+mtcars %>% group_by(am) %>% summarise(mean(mpg), max(wt), min(wt), sd(hp))
 
 
 #summarise----
 summarise(mtcars, mean(disp))  
-summarise(group_by(mtcars, cyl), mean(disp)) 
+summarise(group_by(mtcars, cyl), mean(disp), mean(hp), max(disp)) 
 summarise(group_by(mtcars, cyl), m = mean(disp), sd = sd(disp))
 
 
